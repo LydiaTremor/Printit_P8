@@ -23,27 +23,6 @@ const slides = [
 ];
 
 
-///////////////   Récupération des flèches dans le DOM
-let fleche_gauche = document.querySelector(".arrow_left");
-console.log(fleche_gauche);
-
-let fleche_droite = document.querySelector(".arrow_right");
-console.log(fleche_droite);
-
-
-///////////////   Création d'un évènement au click
-function event_arrows () {
-	fleche_gauche.addEventListener("click", function() {
-		console.log("Ca fonctionne");
-	});
-	
-	fleche_droite.addEventListener("click", function() {
-		console.log("Ca fonctionne");
-	});
-}
-event_arrows();
-
-
 //////////////	   Boucle forEach
 
 //La méthode forEach() des instances Array exécute une fonction fournie une fois pour chaque élément du tableau.
@@ -76,7 +55,7 @@ function slider() {
 		//La fonction ou méthode parseInt() analyse un argument de chaîne et renvoie le premier entier (convertit chaine en un nombre entier) de la base spécifiée 
 		//Si le 1er élément de l'index est triplement également (égalité stricte) à 0, on affiche tous les éléments ci-dessous 
         if(parseInt(index) === 0){  // ? index === 0
-			//Ajouter la class dot_selected (bullet point remplit) à la class dot (bullet points vide) : remplit pour l'image sélectionnée
+			//On ajoute la class dot_selected (bullet point remplit) à la constance dot (div dot)
             dot.classList.add('dot_selected');
 
             //Afficher la première diapositive
@@ -90,7 +69,7 @@ function slider() {
             document.querySelector('#banner > p').innerHTML = element.tagLine;
         }
 
-		//Puis, on ajoute la class dot (bullet points vide) pour les autres images
+		//Puis, on ajoute la class dot (bullet points vide) à la constance dot (div dot)
         dot.classList.add('dot');
 		//On récupère et on déclare la class dot (bullet points vide) comme étant l'enfant du parent (la div dots)
         document.querySelector('.dots').appendChild(dot);
@@ -101,8 +80,62 @@ function slider() {
 slider();
 
 
+//////////////     Modifiez le slide au clic sur le bouton
+
+//On crée une fonction (clickArrows)
+function clickArrows () {
+
+	//Récupération des flèches dans le DOM
+	let fleche_gauche = document.querySelector(".arrow_left");
+	console.log(fleche_gauche);
+	let fleche_droite = document.querySelector(".arrow_right");
+	console.log(fleche_droite);
+
+	//On crée un boucle infini
+	// ou for (let i = 0; i++)
+	for (let i = 0; i < dot.length; i++) {
+		//Incrémenter
+		if ((parseInt(index) === 0)) {
+			fleche_gauche.addEventListener("click", function() {
+			});
+			console.log(dot + 1);
+		}
+		//Décrémenter
+		else ((parseInt(index) === -1)) {
+			// ou for (let i = 0; i > dot.length; -i) 
+			for (let i = 0; i < dot.length; i--) {
+				fleche_droite.addEventListener("click", function() {
+				});
+				console.log(dot - 1);
+			}
+		}
+	}
+}
+
+//La fonction clickArrows est appelée
+//clickArrows();
+
+/*
+///////////////   Récupération des flèches dans le DOM
+let fleche_gauche = document.querySelector(".arrow_left");
+console.log(fleche_gauche);
+
+let fleche_droite = document.querySelector(".arrow_right");
+console.log(fleche_droite);
 
 
+///////////////   Création d'un évènement au click
+function event_arrows () {
+	fleche_gauche.addEventListener("click", function() {
+		console.log("Ca fonctionne");
+	});
+	
+	fleche_droite.addEventListener("click", function() {
+		console.log("Ca fonctionne");
+	});
+}
+event_arrows();
+*/
 
 
 
