@@ -43,17 +43,9 @@ const slides = [
 	}
 ];
 
-//////////////     Modifiez le slide au clic sur le bouton
+//////////////     On crée une fonction (slider) pour créer l'élement 
+//////////////     dynamique (div dot) et afficher les bon bullets points
 
-//Récupération des flèches dans le DOM
-let fleche_gauche = document.querySelector(".arrow_left");
-console.log(fleche_gauche);
-let fleche_droite = document.querySelector(".arrow_right");
-console.log(fleche_droite);
-const dot = document.querySelector('.dots');
-console.log("C'est ok");
-
-//On crée une fonction (slider)
 function slider() {
 
 	//Dans le tableau slides déclaré ci-dessus, on crée un boucle boucle forEach avec un index et des éléments
@@ -92,21 +84,17 @@ function slider() {
 //La fonction slider est appelée
 slider();
 
+//////////////     Modifiez le slide au clic sur le bouton
 
-/*
-//Au clic qur la flèche gauche
-fleche_gauche.addEventListener("click", function(element) {
-	for (let i = 0; i < dot.length; i++) {
-		let increment = dot + 1;
-		console.log(increment);
-		increment.innerHTML = element.image;
-		increment.innerHTML = element.alt;
-		increment.innerText = element.tagLine;
-	}	
-});
-ou */
+//Récupération des flèches dans le DOM
+let fleche_gauche = document.querySelector(".arrow_left");
+console.log(fleche_gauche);
+let fleche_droite = document.querySelector(".arrow_right");
+console.log(fleche_droite);
+const dot = document.querySelector('.dots');
+console.log("C'est ok");
 
-//Au clic qur la flèche gauche : test avec element et while
+//Au clic qur la flèche gauche : Méthode 1 avec while
 fleche_gauche.addEventListener("click", function(element) {
 	let increment = dot + 1;
 	while (increment < 4) {
@@ -118,7 +106,20 @@ fleche_gauche.addEventListener("click", function(element) {
 	}	
 });
 
-/*
+/*  ou Méthode 2 (gauche)
+//Au clic qur la flèche gauche
+fleche_gauche.addEventListener("click", function(element) {
+	for (let i = 0; i < dot.length; i++) {
+		let increment = dot + 1;
+		console.log(increment);
+		increment.innerHTML = element.image;
+		increment.innerHTML = element.alt;
+		increment.innerText = element.tagLine;
+	}	
+});
+*/
+
+/* ou Méthode 3 (droite)
 //Au clic qur la flèche droite
 fleche_droite.onclick = function () {
 	for (let i = 0; i < dot.length; i--) {
@@ -126,14 +127,20 @@ fleche_droite.onclick = function () {
 		console.log(dot - 1);
 	}
 }
-ou */
+*/
+
 
 //Au clic qur la flèche droite
-fleche_droite.addEventListener("click", function () {
-	for (let i = 0; i < dot.length; i--) {
-		let decrement = dot - 1;
-		console.log(decrement);
-		//dot.innerText = dot - 1
+fleche_droite.addEventListener("click", function (element) {
+	let decrement = dot - 1;
+	for (let i = decrement.length -1 ; i>= 0; i--) {
+		if(decrement[i] < 0) {
+			decrement.innerHTML = element.image;
+			decrement.innerHTML = element.alt;
+			decrement.innerText = element.tagLine;
+			decrement--
+			console.log(decrement);
+		}
 	}
 });
 
