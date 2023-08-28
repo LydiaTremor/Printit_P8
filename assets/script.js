@@ -1,3 +1,24 @@
+/*
+//////////////	   Boucle forEach
+
+//La méthode forEach() des instances Array exécute une fonction fournie une fois pour chaque élément du tableau.
+//Permet d'exécuter une fonction donnée sur chaque élément du tableau.
+//element : l'élément actuel en cours de traitement dans le tableau.
+//index : index du tableau. Index est un argument facultatif qui porte l'index de element.
+
+
+const array1 = ['a', 'b', 'c'];
+
+array1.forEach((element) => console.log(element));
+
+// Expected output: "a"
+// Expected output: "b"
+// Expected output: "c"
+*/
+
+
+
+
 //////////////  Tableau contenant une image, un attribut alt et un tagLine    
 const slides = [
 	{
@@ -22,23 +43,15 @@ const slides = [
 	}
 ];
 
+//////////////     Modifiez le slide au clic sur le bouton
 
-//////////////	   Boucle forEach
-
-//La méthode forEach() des instances Array exécute une fonction fournie une fois pour chaque élément du tableau.
-//Permet d'exécuter une fonction donnée sur chaque élément du tableau.
-//element : l'élément actuel en cours de traitement dans le tableau.
-//index : index du tableau. Index est un argument facultatif qui porte l'index de element.
-
-/*
-const array1 = ['a', 'b', 'c'];
-
-array1.forEach((element) => console.log(element));
-
-// Expected output: "a"
-// Expected output: "b"
-// Expected output: "c"
-*/
+//Récupération des flèches dans le DOM
+let fleche_gauche = document.querySelector(".arrow_left");
+console.log(fleche_gauche);
+let fleche_droite = document.querySelector(".arrow_right");
+console.log(fleche_droite);
+const dot = document.querySelector('.dots');
+console.log("C'est ok");
 
 //On crée une fonction (slider)
 function slider() {
@@ -80,62 +93,58 @@ function slider() {
 slider();
 
 
-//////////////     Modifiez le slide au clic sur le bouton
-
-//On crée une fonction (clickArrows)
-function clickArrows () {
-
-	//Récupération des flèches dans le DOM
-	let fleche_gauche = document.querySelector(".arrow_left");
-	console.log(fleche_gauche);
-	let fleche_droite = document.querySelector(".arrow_right");
-	console.log(fleche_droite);
-
-	//On crée un boucle infini
-	// ou for (let i = 0; i++)
+/*
+//Au clic qur la flèche gauche
+fleche_gauche.addEventListener("click", function(element) {
 	for (let i = 0; i < dot.length; i++) {
-		//Incrémenter
-		if ((parseInt(index) === 0)) {
-			fleche_gauche.addEventListener("click", function() {
-			});
-			console.log(dot + 1);
-		}
-		//Décrémenter
-		else ((parseInt(index) === -1)) {
-			// ou for (let i = 0; i > dot.length; -i) 
-			for (let i = 0; i < dot.length; i--) {
-				fleche_droite.addEventListener("click", function() {
-				});
-				console.log(dot - 1);
-			}
-		}
-	}
-}
+		let increment = dot + 1;
+		console.log(increment);
+		increment.innerHTML = element.image;
+		increment.innerHTML = element.alt;
+		increment.innerText = element.tagLine;
+	}	
+});
+ou */
 
-//La fonction clickArrows est appelée
-//clickArrows();
+//Au clic qur la flèche gauche : test avec element et while
+fleche_gauche.addEventListener("click", function(element) {
+	let increment = dot + 1;
+	while (increment < 4) {
+		increment.innerHTML = element.image;
+		increment.innerHTML = element.alt;
+		increment.innerText = element.tagLine;
+		console.log(increment);
+		increment++
+	}	
+});
 
 /*
-///////////////   Récupération des flèches dans le DOM
-let fleche_gauche = document.querySelector(".arrow_left");
-console.log(fleche_gauche);
-
-let fleche_droite = document.querySelector(".arrow_right");
-console.log(fleche_droite);
-
-
-///////////////   Création d'un évènement au click
-function event_arrows () {
-	fleche_gauche.addEventListener("click", function() {
-		console.log("Ca fonctionne");
-	});
-	
-	fleche_droite.addEventListener("click", function() {
-		console.log("Ca fonctionne");
-	});
+//Au clic qur la flèche droite
+fleche_droite.onclick = function () {
+	for (let i = 0; i < dot.length; i--) {
+		fleche_droite.addEventListener("click", slider());
+		console.log(dot - 1);
+	}
 }
-event_arrows();
-*/
+ou */
+
+//Au clic qur la flèche droite
+fleche_droite.addEventListener("click", function () {
+	for (let i = 0; i < dot.length; i--) {
+		let decrement = dot - 1;
+		console.log(decrement);
+		//dot.innerText = dot - 1
+	}
+});
+
+
+
+
+
+
+
+
+
 
 
 
