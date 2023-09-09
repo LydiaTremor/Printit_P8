@@ -75,15 +75,36 @@ let currentIndex = 0;
 //
 function showSlide(direction){
     currentIndex = currentIndex + direction;
-	
-	/*
-	if début(currentIndex == 0)
-	elseif fin (currentIndex >= 3)
-	slides.lenght
-	slides.lenght
-	
 
-	*/
+	// Méthode 1
+	//*** Si on est à la dernière image et que l’on clique à droite :
+	if (currentIndex === 4) /*(length.slides === 4)*/ {
+		//=> On affiche la première image
+		console.log( currentIndex === 0);
+		//=> Le point sélectionné est le premier
+		return document.querySelector('.dots').appendChild(dot);
+		console.log(".dots");
+	}
+	//*** Si on est à la première image et qu’on clique à gauche :
+	else if (currentIndex === 0 && fleche_droite.addEventListener("click", showSlide-1)) /*(length.slides === 0)*/ {
+		//=> On affiche la dernière image
+		console.log(currentIndex === 4);
+		//=> Le point sélectionné est le dernier
+		return document.querySelector('.dots').appendChild(dot);
+	}
+	//*** Dans tous les cas, le texte change en accord avec l’image montrée
+	//return currentIndex;
+
+	// Méthode 2
+	/*if(currentIndex === 0) { 
+		//console.log(showSlide);
+		return slides.lenght;
+	}
+	else if (currentIndex == 4) {
+		//console.log(showSlide -1);
+		//return currentIndex == 0;
+		return currentIndex -1;
+	}*/
 
     document.querySelector('.banner-img').src = './assets/images/slideshow/'+slides[currentIndex].image;
 
