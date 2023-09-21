@@ -1,4 +1,4 @@
-//////////////  Tableau contenant une image, un attribut alt et un tagLine    
+//////////////  TABLEAU contenant une image, un attribut alt et un tagLine    
 const slides = [
 	{
 		"image":"slide1.jpg",
@@ -22,13 +22,13 @@ const slides = [
 	}
 ];
 
-//////////////     On crée une fonction (slider) pour créer l'élement 
-//////////////     dynamique (div dot) et afficher les bon bullets points
+
+//////////////     BULLETS POINTS : On crée une fonction (slider) pour créer l'élement dynamique (div dot) et afficher les bon bullets points
 
 function slider() {
 
 	//Dans le tableau slides déclaré ci-dessus, on crée un boucle boucle forEach avec un index et des éléments
-    slides.forEach((index,element) => {
+    slides.forEach((index, element) => {
 
 		//On affiche les informations dans la console
         console.log('Ligne du tableau', index, element); 
@@ -36,8 +36,8 @@ function slider() {
         const dot = document.createElement('div');
 
 		//Condition avec innerHTML: Modifiez le slide au clic sur le bouton
-		//La fonction ou méthode parseInt() analyse un argument de chaîne et renvoie le premier entier (convertit chaine en un nombre entier) de la base spécifiée 
-		//Si le 1er élément de l'index est triplement également (égalité stricte en valeur et en type) à 0, on affiche tous les éléments ci-dessous 
+		//La méthode parseInt() : convertit une chaine en un nombre entier 
+		//Si le 1er élément de l'index est triplement également (égalité stricte en valeur et en type) à 0
         if(parseInt(index) === 0){  
 			//On ajoute la class dot_selected (bullet point remplit) à la constance dot (div dot)
             dot.classList.add('dot_selected');
@@ -63,7 +63,9 @@ function slider() {
 //La fonction slider est appelée
 slider();
 
-//////////////     Modifiez le slide au clic sur le bouton
+
+
+//////////////     FLÊCHES GAUCHE / DROITE : Modifiez le slide au clic sur le bouton + addEventListener
 
 //Récupération des flèches dans le DOM
 let fleche_gauche = document.querySelector(".arrow_left");
@@ -71,49 +73,6 @@ console.log(fleche_gauche);
 let fleche_droite = document.querySelector(".arrow_right");
 console.log(fleche_droite);
 let currentIndex = 0;
-
-//
-function showSlide(direction){
-    currentIndex = currentIndex + direction;
-
-	// Méthode 1
-	//*** Si on est à la dernière image et que l’on clique à droite :
-	if (currentIndex === 4) /*(length.slides === 4)*/ {
-		//=> On affiche la première image
-		console.log( currentIndex === 0);
-		//=> Le point sélectionné est le premier
-		return document.querySelector('.dots').appendChild(dot);
-		console.log(".dots");
-	}
-	//*** Si on est à la première image et qu’on clique à gauche :
-	else if (currentIndex === 0 && fleche_droite.addEventListener("click", showSlide-1)) /*(length.slides === 0)*/ {
-		//=> On affiche la dernière image
-		console.log(currentIndex === 4);
-		//=> Le point sélectionné est le dernier
-		return document.querySelector('.dots').appendChild(dot);
-	}
-	//*** Dans tous les cas, le texte change en accord avec l’image montrée
-	//return currentIndex;
-
-	// Méthode 2
-	/*if(currentIndex === 0) { 
-		//console.log(showSlide);
-		return slides.lenght;
-	}
-	else if (currentIndex == 4) {
-		//console.log(showSlide -1);
-		//return currentIndex == 0;
-		return currentIndex -1;
-	}*/
-
-    document.querySelector('.banner-img').src = './assets/images/slideshow/'+slides[currentIndex].image;
-
-	//Récupère l'attribut alt en ciblant la class banner-img
-    document.querySelector('.banner-img').alt = slides[currentIndex].alt;
-
-	//Récupère texte en ciblant tous les p de l'id banner + modification du texte avec innerHTML en récupérant les tagLine
-    document.querySelector('#banner > p').innerHTML = slides[currentIndex].tagLine;
-}
 
 //Au clic qur la flèche gauche : Méthode 1 avec while
 fleche_gauche.addEventListener("click", function() {
@@ -125,6 +84,53 @@ fleche_droite.addEventListener("click", function () {
 	showSlide(1);
 });
 
+
+//////////////     UNE BOUCLE POUR LE SLIDE
+
+//Défilement du slide infini avec le bon bullet point sélectionné
+function showSlide(direction) {
+	// ?
+    currentIndex = currentIndex + direction;
+
+	//*** Le texte change en accord avec l’image montrée
+    document.querySelector('.banner-img').src = './assets/images/slideshow/'+slides[currentIndex].image;
+
+	//On récupère l'attribut alt en ciblant la class banner-img
+    document.querySelector('.banner-img').alt = slides[currentIndex].alt;
+
+	//On récupère texte en ciblant tous les p de l'id banner + modification du texte avec innerHTML en récupérant les tagLine
+    document.querySelector('#banner > p').innerHTML = slides[currentIndex].tagLine;
+
+	//Condition pour afficher le slide infini
+	//*** Si on est à la dernière image et que l’on clique à droite :
+	if(currentIndex === (slides.length - 1)) { 
+		//=> On affiche la première image
+		currentIndex = 0;
+	}
+	//*** Si on est à la première image et qu’on clique à gauche :
+	else if (currentIndex === -1)  {
+		//=> On affiche la dernière image
+		currentIndex === slides.length - 1;
+	}
+
+	//Condition pour ajouter la class dot_selected
+	function bullet_points() {
+		//Si l'image, l'alt et le tag sont sélectionnés
+		//if(dot === slides.length) {
+		if(`${dot} == ${slides.length}`) {
+			//=> On affiche le point sélectionné
+			document.querySelector('.dots').appendChild(dot);
+			dot.classList.add('dot_selected');
+		}
+		//Sinon
+		else {
+			//Supprimer la class dot_selected
+			dot.classList.remove('dot_selected');
+	
+		}
+	}
+	bullet_points();
+}
 
 
 
